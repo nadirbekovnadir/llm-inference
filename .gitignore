@@ -43,3 +43,7 @@ venv-vllm/
 llama.cpp/
 models/
 results/
+
+# Chat UI
+.chat_history/
+.backend_logs/

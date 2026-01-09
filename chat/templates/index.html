@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Chat</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="app">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <button class="new-chat-btn" onclick="createNewChat()">
+                <span class="icon">+</span> New Chat
+            </button>
+            <div class="chat-list" id="chatList">
+                <!-- Chat items will be inserted here -->
+            </div>
+        </aside>
+
+        <!-- Main content -->
+        <main class="main">
+            <!-- Header -->
+            <header class="header">
+                <h1>LLM Chat</h1>
+                <div class="header-controls">
+                    <div class="backend-selector">
+                        <label>Backend:</label>
+                        <select id="backendSelect" onchange="onBackendChange()">
+                            <option value="vllm">vLLM</option>
+                            <option value="llamacpp">llama.cpp</option>
+                        </select>
+                        <span class="status-indicator" id="statusIndicator" title="Backend status"></span>
+                    </div>
+                    <div class="model-selector">
+                        <label>Model:</label>
+                        <select id="modelSelect" onchange="onModelChange()">
+                            <option value="">Select a model...</option>
+                        </select>
+                    </div>
+                    <button class="settings-btn" onclick="toggleSettings()" title="Settings">
+                        <span class="icon">&#9881;</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Messages area -->
+            <div class="messages" id="messages">
+                <div class="welcome-message" id="welcomeMessage">
+                    <h2>Welcome to LLM Chat</h2>
+                    <p>Select a model to start chatting</p>
+                </div>
+            </div>
+
+            <!-- Input area -->
+            <div class="input-area">
+                <div class="input-container">
+                    <textarea
+                        id="messageInput"
+                        placeholder="Type a message..."
+                        rows="1"
+                        onkeydown="handleKeyDown(event)"
+                        oninput="autoResize(this)"
+                    ></textarea>
+                    <button class="send-btn" onclick="sendMessage()" id="sendBtn">
+                        <span class="icon">&#10148;</span>
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Settings panel -->
+        <div class="settings-panel" id="settingsPanel">
+            <div class="settings-header">
+                <h3>Generation Settings</h3>
+                <button class="close-btn" onclick="toggleSettings()">&times;</button>
+            </div>
+            <div class="settings-content">
+                <div class="setting-item">
+                    <label for="temperature">Temperature</label>
+                    <div class="setting-control">
+                        <input type="range" id="temperature" min="0" max="2" step="0.1" value="0.7"
+                               oninput="updateSettingValue('temperature')">
+                        <span class="setting-value" id="temperatureValue">0.7</span>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <label for="maxTokens">Max Tokens</label>
+                    <div class="setting-control">
+                        <input type="range" id="maxTokens" min="100" max="8192" step="100" value="2048"
+                               oninput="updateSettingValue('maxTokens')">
+                        <span class="setting-value" id="maxTokensValue">2048</span>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <label for="topP">Top P</label>
+                    <div class="setting-control">
+                        <input type="range" id="topP" min="0" max="1" step="0.05" value="0.9"
+                               oninput="updateSettingValue('topP')">
+                        <span class="setting-value" id="topPValue">0.9</span>
+                    </div>
+                </div>
+                <button class="reset-btn" onclick="resetSettings()">Reset to Defaults</button>
+            </div>
+        </div>
+
+        <!-- Loading modal -->
+        <div class="modal" id="loadingModal">
+            <div class="modal-content">
+                <div class="spinner"></div>
+                <h3 id="loadingTitle">Starting Backend...</h3>
+                <div class="loading-logs" id="loadingLogs"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
