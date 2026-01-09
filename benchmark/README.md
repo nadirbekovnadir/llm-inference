@@ -38,12 +38,12 @@
 
 ```bash
 # Терминал 1: Запуск vLLM сервера
-source ~/repo/llm-inference/venv-vllm/bin/activate
+source venv-vllm/bin/activate
 vllm serve models/hf/Qwen3-8B-AWQ --port 8000
 
 # Терминал 2: Запуск бенчмарка
-source ~/repo/llm-inference/venv-vllm/bin/activate
-cd ~/repo/llm-inference
+source venv-vllm/bin/activate
+# (опционально) cd в корень проекта
 
 python benchmark/benchmark.py \
     --backend vllm \
@@ -59,14 +59,14 @@ python benchmark/benchmark.py \
 # Остановить vLLM (Ctrl+C в терминале 1)
 
 # Терминал 1: Запуск llama.cpp сервера
-~/repo/llm-inference/llama.cpp/build/bin/llama-server \
-    --model ~/repo/llm-inference/models/gguf/Qwen3-8B-Q4_K_M.gguf \
+./llama.cpp/build/bin/llama-server \
+    --model models/gguf/Qwen3-8B-Q4_K_M.gguf \
     --n-gpu-layers -1 \
     --port 8001
 
 # Терминал 2: Запуск бенчмарка
-source ~/repo/llm-inference/venv-vllm/bin/activate
-cd ~/repo/llm-inference
+source venv-vllm/bin/activate
+# (опционально) cd в корень проекта
 
 python benchmark/benchmark.py \
     --backend llamacpp \
@@ -95,7 +95,7 @@ python benchmark/compare_results.py \
 vllm serve models/hf/Qwen3-8B-AWQ --port 8000 --gpu-memory-utilization 0.4
 
 # Терминал 2: llama.cpp на порту 8001
-llama-server --model models/gguf/Qwen3-8B-Q4_K_M.gguf --n-gpu-layers -1 --port 8001
+./llama.cpp/build/bin/llama-server --model models/gguf/Qwen3-8B-Q4_K_M.gguf --n-gpu-layers -1 --port 8001
 
 # Терминал 3: Бенчмарк обоих
 python benchmark/benchmark.py \
@@ -278,7 +278,7 @@ nvidia-smi -l 1  # Мониторинг в реальном времени
 vllm serve model --gpu-memory-utilization 0.7
 
 # llama.cpp: уменьшить количество GPU слоёв
-llama-server --model model.gguf --n-gpu-layers 20
+./llama.cpp/build/bin/llama-server --model model.gguf --n-gpu-layers 20
 
 # Или тестировать по отдельности
 ```
