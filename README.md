@@ -25,15 +25,6 @@ llm-inference/
 └── README.md
 ```
 
-## 🔧 Системные требования
-
-- **GPU**: NVIDIA с 16+ GB VRAM (тестировалось на RTX 4080 SUPER)
-- **RAM**: 32+ GB (62+ GB для CPU offloading больших моделей)
-- **CUDA**: 12.4+
-- **OS**: Linux / WSL2
-- **Python**: 3.12+
-- **System Packages**: `build-essential`, `python3-dev`, `cmake` (для сборки llama.cpp)
-
 ## 🚀 Установка
 
 ### 1. Подготовка системы
