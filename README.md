@@ -42,14 +42,19 @@ llm-inference/
 
 ```bash
 sudo apt update
-sudo apt install build-essential python3-dev
+sudo apt install build-essential python3-dev cmake git
 ```
 
-### 2. vLLM
+### 2. Клонирование репозитория
 
 ```bash
-cd ~/repo/llm-inference
+git clone https://github.com/your-username/llm-inference.git
+cd llm-inference
+```
 
+### 3. vLLM
+
+```bash
 # Создание и активация окружения (используя uv для скорости)
 # Если uv не установлен: pip install uv
 uv venv venv-vllm
@@ -69,12 +74,15 @@ python -c "from vllm import LLM; print('vLLM OK')"
 
 Подробнее: [vLLM Troubleshooting](https://docs.vllm.ai/en/latest/usage/troubleshooting/)
 
-### 3. llama.cpp
+### 4. llama.cpp
 
-Для работы llama.cpp требуется компиляция (особенно для поддержки CUDA).
+Для работы llama.cpp необходимо склонировать репозиторий и скомпилировать его (особенно для поддержки CUDA).
 
 ```bash
-cd ~/repo/llm-inference/llama.cpp
+# Клонирование llama.cpp внутрь проекта
+git clone https://github.com/ggml-org/llama.cpp
+
+cd llama.cpp
 
 # Очистка старой сборки (если есть)
 rm -rf build
@@ -89,9 +97,12 @@ cmake --build build --config Release -j$(nproc)
 ./build/bin/llama-server --version
 ```
 
-### 4. Зависимости для бенчмарка
+### 5. Зависимости для бенчмарка
 
 ```bash
+# Возвращаемся в корень проекта
+cd ..
+
 source venv-vllm/bin/activate
 pip install httpx
 ```

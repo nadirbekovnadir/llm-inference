@@ -42,3 +42,4 @@ temp/
 venv-vllm/
 llama.cpp/
 models/
+results/
