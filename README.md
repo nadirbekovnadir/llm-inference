@@ -58,11 +58,6 @@ uv pip install vllm httpx
 python -c "from vllm import LLM; print('vLLM OK')"
 ```
 
-**Известные проблемы на WSL2**: vLLM v0.13.0 имеет проблемы с v1 engine на WSL2. Возможные решения:
-- Использовать `VLLM_ENABLE_V1_MULTIPROCESSING=0`
-- Откатиться на vLLM v0.6.x
-- Использовать нативный Linux
-
 Подробнее: [vLLM Troubleshooting](https://docs.vllm.ai/en/latest/usage/troubleshooting/)
 
 ### 4. llama.cpp
@@ -269,7 +264,7 @@ python benchmark/compare_results.py \
 | **Single request** | ⭐⭐⭐⭐ Хорошо | ⭐⭐⭐⭐⭐ Отлично |
 | **Квантизация** | AWQ, GPTQ, FP8 | Q2-Q8, FP16 |
 | **Memory efficient** | ⭐⭐⭐ Средне | ⭐⭐⭐⭐⭐ Отлично |
-| **WSL2 совместимость** | ⚠️ Проблемы в v0.13.0 | ✅ Отлично |
+| **WSL2 совместимость** | ✅ Отлично | ✅ Отлично |
 
 ### Когда использовать vLLM
 
@@ -397,21 +392,6 @@ print(response.choices[0].message.content)
 ```
 
 ## 🛠️ Troubleshooting
-
-### vLLM на WSL2 не запускается
-
-**Проблема**: `RuntimeError: Engine core initialization failed`
-
-**Решение**:
-```bash
-export VLLM_ENABLE_V1_MULTIPROCESSING=0
-vllm serve models/hf/Qwen3-8B-AWQ --port 8000
-```
-
-Или установите более старую версию:
-```bash
-pip install vllm==0.6.3
-```
 
 ### Out of Memory (OOM) ошибки
 
