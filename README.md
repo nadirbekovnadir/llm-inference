@@ -20,6 +20,7 @@ llm-inference/
 │   ├── hf/             # HuggingFace модели (для vLLM)
 │   └── gguf/           # GGUF модели (для llama.cpp)
 ├── benchmark/          # Инструменты бенчмарка
+│   ├── README.md       # Документация бенчмарка
 │   ├── benchmark.py    # Скрипт измерения производительности
 │   └── compare_results.py
 └── README.md
