@@ -1,0 +1,44 @@
+# Python
+venv-vllm/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Models (too large for git)
+models/
+*.gguf
+*.safetensors
+*.bin
+
+# Build artifacts
+llama.cpp/build/
+llama.cpp/.cache/
+
+# Benchmark results (optional: comment out if you want to track)
+benchmark/results/*.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Temporary files
+tmp/
+temp/
+.cache/
+
+# Custom
+venv-vllm/
+llama.cpp/
+models/
