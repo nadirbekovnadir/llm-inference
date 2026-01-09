@@ -140,7 +140,7 @@ huggingface-cli download Qwen/Qwen3-32B-GGUF Qwen3-32B-Q4_K_M.gguf --local-dir m
 ### vLLM Server
 
 ```bash
-source ~/repo/llm-inference/venv-vllm/bin/activate
+source venv-vllm/bin/activate
 
 # Базовый запуск (модель полностью в GPU)
 vllm serve models/hf/Qwen3-8B-AWQ \
@@ -169,23 +169,23 @@ vllm serve Qwen/Qwen3-8B-AWQ --port 8000
 
 ```bash
 # Все слои в GPU
-~/repo/llm-inference/llama.cpp/build/bin/llama-server \
-    --model ~/repo/llm-inference/models/gguf/Qwen3-8B-Q4_K_M.gguf \
+./llama.cpp/build/bin/llama-server \
+    --model models/gguf/Qwen3-8B-Q4_K_M.gguf \
     --n-gpu-layers -1 \
     --ctx-size 4096 \
     --port 8001 \
     --host 0.0.0.0
 
 # Частичный GPU offload (30 слоёв из 64)
-~/repo/llm-inference/llama.cpp/build/bin/llama-server \
-    --model ~/repo/llm-inference/models/gguf/Qwen3-32B-Q8_0.gguf \
+./llama.cpp/build/bin/llama-server \
+    --model models/gguf/Qwen3-32B-Q8_0.gguf \
     --n-gpu-layers 30 \
     --ctx-size 4096 \
     --port 8001
 
 # С параллельными запросами
-~/repo/llm-inference/llama.cpp/build/bin/llama-server \
-    --model ~/repo/llm-inference/models/gguf/Qwen3-8B-Q8_0.gguf \
+./llama.cpp/build/bin/llama-server \
+    --model models/gguf/Qwen3-8B-Q8_0.gguf \
     --n-gpu-layers -1 \
     --parallel 4 \
     --port 8001
@@ -229,8 +229,8 @@ curl http://localhost:8001/v1/chat/completions \
 Подробная документация в [benchmark/README.md](benchmark/README.md)
 
 ```bash
-source ~/repo/llm-inference/venv-vllm/bin/activate
-cd ~/repo/llm-inference
+source venv-vllm/bin/activate
+# (опционально) cd в корень проекта если вы не там
 
 # Запустить серверы в отдельных терминалах
 # Терминал 1: vLLM на порту 8000
